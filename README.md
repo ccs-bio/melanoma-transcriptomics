@@ -1,8 +1,6 @@
 # Melanoma Transcriptomics
 
-Main description of the package goes here. Lorem ipsum dolor sit amet, tollit lucilius vis an. Placerat imperdiet ei qui, usu ei ipsum laboramus deterruisset. Id veri sonet qui. Ius in indoctum explicari, ei nec fastidii invenire. Eu exerci intellegam his, in fastidii mnesarchum persequeris qui. Ne has prima utinam pertinacia. Mei invidunt postulant et, ne pri diam illum.
-
-Ei sit facilis cotidieque, eam probo postulant ex, has ea minim dictas. Amet mnesarchum an vel, stet perfecto ut nam, ludus vituperatoribus pri id. Luptatum electram sea ne. Eu aeque pericula his.
+The contents of this repository are the source code scripts for the paper "Ensemble Model Approach Targeting Pseudogenes in the Melanoma Transcriptome".  The software contained here covers the methods mentioned in the paper, along with miscellaneous programs, scripts and notes.
 
 
 ## How To Get Started
@@ -19,31 +17,35 @@ Ei sit facilis cotidieque, eam probo postulant ex, has ea minim dictas. Amet mne
 
 The basic requirements for the software available here are:
 
-- Requirement 1
-- Requirement 2
-- Requirement 3
-- Requirement 4
+- [R, 3.3.1 or above](https://www.r-project.org/)
+- [Python 2.7.x](https://www.python.org/)
+- [Perl 5.18.x](https://www.perl.org/)
+- [GeneSpring GX](http://www.genomics.agilent.com/en/Microarray-Data-Analysis-Software/GeneSpring-GX/?cid=AG-PT-130&tabId=AG-PR-1061)
+- [NCBI BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi)
 
-You will also need a reasonably modern computer and operating system that can support the above.  Note that some packages have their own dependencies, refer to their respective user manuals and installation instructions for details.
+You will also need a reasonably modern computer and operating system that can support the above.  Note that some packages have their own dependencies, and you should refer to their respective user manuals and installation instructions for details.
 
-### Requirement Package 1
+### BioPerl
+[BioPerl](http://bioperl.org/) is required for parsing the results from BLAST.
 
-[Some Package](http://somePackageURLgoesHere) is required for SOMETHING.  See the [package documentation](http://packageDocsURLgoesHere) for more information.
+### Bowtie2
 
-### Requirement Package 2
+[Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) is required for the alignment step.  See the Bowtie2 [Getting Started](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#getting-started-with-bowtie-2-lambda-phage-example) guide for instructions on installing and running Bowtie2.
 
-[Some Package](http://somePackageURLgoesHere) is required for SOMETHING.  See the [package documentation](http://packageDocsURLgoesHere) for more information.
+### Samtools
 
-### Requirement Package 3
+[Samtools](http://www.htslib.org/) is required for parsing the alignments and generating miscellaneous alignment statistics.  See the [Samtools Documentation](http://www.htslib.org/doc/) for instructions on installing and running Samtools.
 
-[Some Package](http://somePackageURLgoesHere) is required for SOMETHING.  See the [package documentation](http://packageDocsURLgoesHere) for more information.  In addition, you will also need the following subpackages:
+### R
 
-- [subpackage 1](http://someURLGoes.here/)
-- [subpackage 2](http://someURLGoes.here/)
-- [subpackage 3](http://someURLGoes.here/)
-- [subpackage 4](http://someURLGoes.here/)
-- [subpackage 5](http://someURLGoes.here/)
-- [subpackage 6](http://someURLGoes.here/)
+The latest version of [R](http://www.r-project.org/) is required for calculating the bacterial p-values, and visualizing the read-hit distribution.  You will also need the following R libraries & packages from [CRAN](http://cran.r-project.org/):
+
+- [ggplot2](http://ggplot2.org/)
+- [reshape2](http://cran.r-project.org/web/packages/reshape2/index.html)
+- [plyr](http://cran.r-project.org/web/packages/plyr/index.html)
+- [untb](http://cran.r-project.org/web/packages/untb/index.html)
+- [vegan](http://cran.r-project.org/web/packages/vegan/index.html)
+- [multtest (Bioconductor)](http://www.bioconductor.org/packages/release/bioc/html/multtest.html)
 
 
 
