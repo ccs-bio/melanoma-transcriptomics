@@ -58,11 +58,6 @@ Contact [Camilo Valdes](mailto:cvaldes3@miami.edu) for pull requests, bug report
 - [Camilo Valdes](mailto:cvaldes3@miami.edu)
 
 
-### Collaborators
-
-- [Enrico Capobianco](mailto:ECapobianco@med.miami.edu)
-
-
 ## License
 
 The software in this repository is available under the [GNU General Public License, Version 3](https://github.com/ccs-bio/melanoma-transcriptomics/blob/master/LICENSE).  See the [LICENSE](https://github.com/ccs-bio/melanoma-transcriptomics/blob/master/LICENSE) file for more information.
