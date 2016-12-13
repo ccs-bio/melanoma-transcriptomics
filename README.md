@@ -1,6 +1,6 @@
 # Melanoma Transcriptomics
 
-The contents of this repository are the source code scripts for the paper "Ensemble Model Approach Targeting Pseudogenes in the Melanoma Transcriptome".  The software contained here covers the methods mentioned in the paper, along with miscellaneous programs, scripts and notes.
+The contents of this repository are the source code scripts for the paper "**Ensemble Model Approach Targeting Pseudogenes in the Melanoma Transcriptome**".  The software contained here covers the methods mentioned in the paper, along with miscellaneous programs, scripts and notes.
 
 
 ## How To Get Started
@@ -43,9 +43,9 @@ The latest version of [R](http://www.r-project.org/) is required for calculating
 - [ggplot2](http://ggplot2.org/)
 - [reshape2](http://cran.r-project.org/web/packages/reshape2/index.html)
 - [plyr](http://cran.r-project.org/web/packages/plyr/index.html)
-- [untb](http://cran.r-project.org/web/packages/untb/index.html)
-- [vegan](http://cran.r-project.org/web/packages/vegan/index.html)
-- [multtest (Bioconductor)](http://www.bioconductor.org/packages/release/bioc/html/multtest.html)
+- [DESeq](http://bioconductor.org/packages/release/bioc/html/DESeq.html)
+- [limma](https://bioconductor.org/packages/release/bioc/html/limma.html)
+- [NOISeq](https://www.bioconductor.org/packages/release/bioc/html/NOISeq.html)
 
 
 
