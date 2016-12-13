@@ -1,0 +1,33 @@
+DESeq	Consensus	6.6
+NOISeq	Consensus	1
+CuffDiff	Consensus	4.5
+GeneSpring	Consensus	4.55
+Limma	Consensus	7.35
+Consensus	Linear Model	12
+Consensus	PCA	12
+Linear Model	3prime_overlapping_ncrna	0.25
+Linear Model	Antisense	0.25
+Linear Model	lincRNA	0.25
+Linear Model	miRNA	0.25
+Linear Model	misc_RNA	0.25
+Linear Model	Processed Transcript	0.25
+Linear Model	Protein Coding	4.75
+Linear Model	Pseudogene	4.75
+Linear Model	Sense Intronic	0.25
+Linear Model	Sense Overlapping	0.25
+Linear Model	snRNA	0.25
+Linear Model	snoRNA	0.25
+PCA	3prime_overlapping_ncrna	0.25
+PCA	Antisense	0.25
+PCA	lincRNA	0.25
+PCA	miRNA	0.25
+PCA	misc_RNA	0.25
+PCA	Processed Transcript	0.25
+PCA	Protein Coding	4.75
+PCA	Pseudogene	4.75
+PCA	Sense Intronic	0.25
+PCA	Sense Overlapping	0.25
+PCA	snRNA	0.25
+PCA	snoRNA	0.25
+Protein Coding	Parental	2.5
+Pseudogene	Parental	4.5
