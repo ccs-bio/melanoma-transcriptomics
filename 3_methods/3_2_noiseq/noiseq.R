@@ -11,13 +11,13 @@
 library(NOISeq)
 
 # Base Directory
-setwd("/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full/differential_expression_103/_counts_exonic/noiseq")
+setwd("/path/to/base/analysis/directory/noiseq")
 
 print( paste( "[", format(Sys.time(), "%m/%d/%y %H:%M:%S"),"] Starting... ", sep="") )
 
 algorithm = "noiseq"
 
-pathForQuantResults = "/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full/results-103"
+pathForQuantResults = "/path/to/base/analysis/directory/results-103"
 
 arrayForAlingmentTypes = c( 'counts_exonic' )
 
@@ -85,7 +85,7 @@ for( alnType in arrayForAlingmentTypes ) {
 			
 			# --------------------------------------------- Hierarhical Clustering ---------------------------------------------
 			
-			baseDirFigures = '/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full/Figures_Numbers-Full_103/differential_expression/counts_exonic/noiseq'
+			baseDirFigures = '/path/to/base/analysis/directory/differential_expression/counts_exonic/noiseq'
 
 			selectedGenesForNOISeq = noiseqResultsFiltered[noiseqResultsFiltered$prob > .80,]
 			selectedGenesForNOISeq = selectedGenesForNOISeq[selectedGenesForNOISeq$M > 2,]

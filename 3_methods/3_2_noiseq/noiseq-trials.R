@@ -11,13 +11,13 @@
 library(NOISeq)
 
 # Base Directory
-setwd("/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full/differential_expression_103/noiseq")
+setwd("/path/to/base/analysis/directory/noiseq")
 
 print( paste( "[", format(Sys.time(), "%m/%d/%y %H:%M:%S"),"] Starting... ", sep="") )
 
 algorithm = "noiseq"
 
-pathForQuantResults = "/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full/results-103"
+pathForQuantResults = "/path/to/base/analysis/directory/results-103"
 
 arrayForAlingmentTypes = c( 'counts' )
 arrayForDataTypes = c( 'unique' )

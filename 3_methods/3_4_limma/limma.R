@@ -35,7 +35,7 @@ options( digits = 15 ) # Enable printing of large numbers. R defaults to "roundi
 
 print( paste( "[", format(Sys.time(), "%m/%d/%y %H:%M:%S"),"] R Starting... ", sep="") )
 
-working_directory="/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full"
+working_directory="/path/to/base/analysis/directory"
 
 setwd( file.path( working_directory ) )
 
@@ -65,7 +65,7 @@ for( aFile in files ) {
 		for( dataType in data_types )
 		{
 			
-			baseDirFigures = '/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full/Figures_Numbers-Full_103/differential_expression/fpkm_cuffdiff/limma'
+			baseDirFigures = '/path/to/base/analysis/directory/differential_expression/fpkm_cuffdiff/limma'
 			
 			
 			# ------------------------------------------------- Read Data In ---------------------------------------------------

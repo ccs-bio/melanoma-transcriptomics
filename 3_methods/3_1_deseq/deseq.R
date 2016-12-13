@@ -31,7 +31,7 @@ options( digits = 15 ) # Enable printing of large numbers. R defaults to "roundi
 
 
 # Working Directory
-working_directory="/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full"
+working_directory="/path/to/base/analysis/directory"
 
 setwd( file.path( working_directory ) )
 
@@ -62,7 +62,7 @@ for( aFile in files ) {
 
 		for( fileType in fileTypes ) {
 
-			fileToProcess = paste( "results-103/counts_exonic/", aType, "/", fileType, "/aggregated_expression_profile_for_counts_exonic_", aFile, ".txt", sep="" )
+			fileToProcess = paste( "path/to/input/file/counts_exonic/", aType, "/", fileType, "/aggregated_expression_profile_for_counts_exonic_", aFile, ".txt", sep="" )
 
 			print(fileToProcess)
 
@@ -80,7 +80,7 @@ for( aFile in files ) {
 			
 			# ---------------------------------------------------- Output ------------------------------------------------------
 			
-			outputDir = paste( "differential_expression_103/_counts_exonic/deseq/counts/results_pooled/", aType, "/", fileType, sep="" )
+			outputDir = paste( "path/to/output/directory/_counts_exonic/deseq/counts/results_pooled/", aType, "/", fileType, sep="" )
 			
 			dir.create( file.path( working_directory, outputDir ), showWarnings=FALSE, recursive=TRUE )
 
@@ -92,7 +92,7 @@ for( aFile in files ) {
 			
 			# --------------------------------------------- Hierarhical Clustering ---------------------------------------------
 			
-			baseDirFigures = '/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full/Figures_Numbers-Full_103/differential_expression/counts_exonic/deseq'
+			baseDirFigures = '/path/to/base/analysis/directory/for/Figures_Numbers-Full_103/differential_expression/counts_exonic/deseq'
 
 			selectedGenesForDeseq = results[results$padj < 0.05,]
 			selectedGenesForDeseq = selectedGenesForDeseq[selectedGenesForDeseq$foldChange > 2,]

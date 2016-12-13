@@ -30,7 +30,7 @@ options( digits = 15 ) # Enable printing of large numbers. R defaults to "roundi
 
 print( paste( "[", format(Sys.time(), "%m/%d/%y %H:%M:%S"),"] R Starting... ", sep="") )
 
-working_directory="/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full/differential_expression_103/_cuffdiff"
+working_directory="/path/to/base/analysis/directory/cuffdiff"
 
 setwd( file.path( working_directory ) )
 
@@ -39,7 +39,7 @@ setwd( file.path( working_directory ) )
 # ------------------------------------------------------ Main ---------------------------------------------------------
 
 #	Annotations file
-gtf_file='/Users/camilo/Documents/Development/Bioinformatics/genomes/human/ensembl/72/gtf/Homo_sapiens-CLEAN.GRCh37.72.gtf'
+gtf_file='/path/to/ensembl/72/gtf/Homo_sapiens-CLEAN.GRCh37.72.gtf'
 
 
 # 	Dispersion methods tested
@@ -54,7 +54,7 @@ normalization_methods = c( 'quartile' )
 
 
 # 	Base directory with cuffdiff results
-cuffdiff_results_base = '/Volumes/Data/CCS/Melanoma/cuffdiff'
+cuffdiff_results_base = '/path/to/base/results/directory/Melanoma/cuffdiff'
 
 
 # Read-alignment Types for which counts have been extracted
