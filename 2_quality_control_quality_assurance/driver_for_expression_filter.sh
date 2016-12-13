@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BASE_DIR='/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full'
+BASE_DIR='/path/to/base/analysis/directory'
 
 SCRIPT_PATH=$BASE_DIR'/analysis_scripts_103'
 
@@ -17,7 +17,7 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "]	"
 
 # -------------------------------------------- Contaminating Biotype Removal ------------------------------------------
 
-CONTAMINANT_BIOTYPE_LIST='/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full/results-103/biotype_list_all/1_gene_ids_for_Contaminating_Biotypes.txt'
+CONTAMINANT_BIOTYPE_LIST='/path/to/gene_ids/that/will/be/removed/1_gene_ids_for_Contaminating_Biotypes.txt'
 
 
 

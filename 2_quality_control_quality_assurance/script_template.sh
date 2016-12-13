@@ -1,6 +1,6 @@
 #!/bin/sh
 #BSUB -J 0c2c67ce-c9ff-45ad-a11b-3abc15b7439b
-#BSUB -o /nethome/cvaldes/logs/melanoma_103_cuffquant/0c2c67ce-c9ff-45ad-a11b-3abc15b7439b_log_exonic_reads_cuffquant.txt
+#BSUB -o /path/to/logs/log_file.txt
 #BSUB -W 168:00
 #BSUB -N
 #BSUB -u "cvaldes3@miami.edu"
@@ -55,7 +55,7 @@ TOPHAT_APP_PATH='/nethome/bioinfo/tools/tophat/v2/2.0.12/'
 CUFFLINKS_APP_PATH='/nethome/bioinfo/tools/cufflinks/v2/2.2.1'
 
 # Count extractor, a Perl script that generates the genomic-interval counts for a given gene assembly
-COUNT_APP_PATH='/projects/bioinf/data/cvaldes/tcga/skcm/examination'
+COUNT_APP_PATH='/path/to/counting/script/perl'
 
 
 # ------------------------------------------------ Tools --------------------------------------------------
@@ -69,16 +69,16 @@ PROC_THREADS='32'
 ANNOT_VERSION='72'
 
 # Ensembl annotations file with known biotypes
-GTF_FILE='/nethome/cvaldes/data/references/ensembl/human/'$ANNOT_VERSION'/gtf/Homo_sapiens-CLEAN.GRCh37.'$ANNOT_VERSION'.gtf'
+GTF_FILE='/path/to/ensembl/human/'$ANNOT_VERSION'/gtf/Homo_sapiens-CLEAN.GRCh37.'$ANNOT_VERSION'.gtf'
 
 # Mask file for ignoring highly abundant rRNAs
-RRNA_MASK_GTF_FILE='/nethome/cvaldes/data/references/ensembl/human/'$ANNOT_VERSION'/gtf/rRNAs.gtf'
+RRNA_MASK_GTF_FILE='/npath/to/references/ensembl/human/'$ANNOT_VERSION'/gtf/rRNAs.gtf'
 
 # Genome index database(s) in the format for each algorithm
-INDEX_FOR_BOWTIE2='/projects/bioinf/ref/annotations/ensembl/human/'$ANNOT_VERSION'/dna/bowtie2/ensembl_hs_'$ANNOT_VERSION'.dna'
+INDEX_FOR_BOWTIE2='/path/to/ref/annotations/ensembl/human/'$ANNOT_VERSION'/dna/bowtie2/ensembl_hs_'$ANNOT_VERSION'.dna'
 
 # Human Genome FASTA File
-GENOME_FASTA_FILE_DNA='/projects/bioinf/ref/annotations/ensembl/human/'$ANNOT_VERSION'/dna/bowtie2/ensembl_hs_'$ANNOT_VERSION'.dna.fa'
+GENOME_FASTA_FILE_DNA='/path/to/ref/annotations/ensembl/human/'$ANNOT_VERSION'/dna/bowtie2/ensembl_hs_'$ANNOT_VERSION'.dna.fa'
 
 
 # -------------------------------------------- Miscellaneous ----------------------------------------------
@@ -94,7 +94,7 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
 OUTPUT_DIR_FOR_FASTQ=$BASE_OUTPUT_DIR'/fastq/'$SAMPLE_BASE
 mkdir -p $OUTPUT_DIR_FOR_FASTQ
 
-BAM_FILE='/projects/bioinf/data/cvaldes/tcga/skcm/raw/'$SAMPLE_BASE'/'$READ_BASE'.sorted_genome_alignments.bam'
+BAM_FILE='/path/to/tcga/skcm/raw/'$SAMPLE_BASE'/'$READ_BASE'.sorted_genome_alignments.bam'
 
 FASTQ_BASE_NAME=$OUTPUT_DIR_FOR_FASTQ'/'$READ_BASE
 
@@ -102,7 +102,7 @@ FASTQ_BASE_NAME=$OUTPUT_DIR_FOR_FASTQ'/'$READ_BASE
 FASTQ_BASE_NAME_MASK=$FASTQ_BASE_NAME'#'
 
 # Run the conversion tool
-# $BAM2FASTQ_APP_PATH/bam2fastq --force --output $FASTQ_BASE_NAME_MASK $BAM_FILE
+$BAM2FASTQ_APP_PATH/bam2fastq --force --output $FASTQ_BASE_NAME_MASK $BAM_FILE
 
 # FASTQ files of the BAM files are stored in the following two (2) files
 READ_SAMPLE_1=$FASTQ_BASE_NAME'_1'
@@ -129,13 +129,13 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Aligning to DNA version..."
 #
 #	TopHat run
 #
-# $TOPHAT_APP_PATH/tophat2 -p $PROC_THREADS --output-dir $OUTPUT_DIR_ALIGNMENTS_DNA \
-# 										  --min-anchor $TH_MIN_ANCHOR \
-# 										  --no-coverage-search \
-# 										  --GTF $GTF_FILE \
-# 										  $INDEX_FOR_BOWTIE2 \
-# 										  $READ_SAMPLE_1 \
-# 										  $READ_SAMPLE_2
+$TOPHAT_APP_PATH/tophat2 -p $PROC_THREADS --output-dir $OUTPUT_DIR_ALIGNMENTS_DNA \
+										  --min-anchor $TH_MIN_ANCHOR \
+										  --no-coverage-search \
+										  --GTF $GTF_FILE \
+										  $INDEX_FOR_BOWTIE2 \
+										  $READ_SAMPLE_1 \
+										  $READ_SAMPLE_2
 
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Done."
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
@@ -174,9 +174,9 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"$DASHES
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Samtools - MAPQ = All"
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"$DASHES
 
-# $SAMTOOLS_PATH/samtools sort $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.bam $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.sorted
-# $SAMTOOLS_PATH/samtools index $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.sorted.bam
-# $SAMTOOLS_PATH/samtools flagstat $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.sorted.bam > $OUTPUT_DIR_ALIGNMENTS_DNA/flagStats-all.txt
+$SAMTOOLS_PATH/samtools sort $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.bam $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.sorted
+$SAMTOOLS_PATH/samtools index $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.sorted.bam
+$SAMTOOLS_PATH/samtools flagstat $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.sorted.bam > $OUTPUT_DIR_ALIGNMENTS_DNA/flagStats-all.txt
 
 # ------------------------------------ Multi ----------------------------------
 
@@ -184,10 +184,10 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"$DASHES
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Samtools - MAPQ = Multi"
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"$DASHES
 
-# $SAMTOOLS_PATH/samtools view -b -f 256 $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.bam > $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-multi.bam
-# $SAMTOOLS_PATH/samtools sort $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-multi.bam $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-multi.sorted
-# $SAMTOOLS_PATH/samtools index $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-multi.sorted.bam
-# $SAMTOOLS_PATH/samtools flagstat $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-multi.sorted.bam > $OUTPUT_DIR_ALIGNMENTS_DNA/flagStats-multi.txt
+$SAMTOOLS_PATH/samtools view -b -f 256 $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.bam > $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-multi.bam
+$SAMTOOLS_PATH/samtools sort $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-multi.bam $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-multi.sorted
+$SAMTOOLS_PATH/samtools index $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-multi.sorted.bam
+$SAMTOOLS_PATH/samtools flagstat $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-multi.sorted.bam > $OUTPUT_DIR_ALIGNMENTS_DNA/flagStats-multi.txt
 
 
 # --------------------------------- Multi MAPQ --------------------------------
@@ -203,10 +203,10 @@ OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED_SORTED=$OUTPUT_DIR_ALIGNMENTS_DNA'/'$
 OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED_SORTED_BAM=$OUTPUT_DIR_ALIGNMENTS_DNA'/'$OUTPUT_FILE_BASE_NAME''$MAPQ_QUAL'.sorted.bam'
 OUTPUT_FILE_WITH_MULTI_FLAGSTATS=$OUTPUT_DIR_ALIGNMENTS_DNA'/flagstats-multi_mapq'$MAPQ_QUAL'.txt'
 
-# $SAMTOOLS_PATH/samtools view -b -q $MAPQ_QUAL $INPUT_FILE_WITH_MULTI_ALIGNMENTS > $OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED
-# $SAMTOOLS_PATH/samtools sort $OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED $OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED_SORTED
-# $SAMTOOLS_PATH/samtools index $OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED_SORTED_BAM
-# $SAMTOOLS_PATH/samtools flagstat $OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED_SORTED_BAM > $OUTPUT_FILE_WITH_MULTI_FLAGSTATS
+$SAMTOOLS_PATH/samtools view -b -q $MAPQ_QUAL $INPUT_FILE_WITH_MULTI_ALIGNMENTS > $OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED
+$SAMTOOLS_PATH/samtools sort $OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED $OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED_SORTED
+$SAMTOOLS_PATH/samtools index $OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED_SORTED_BAM
+$SAMTOOLS_PATH/samtools flagstat $OUTPUT_FILE_WITH_MULTI_ALIGNMENTS_FILTERED_SORTED_BAM > $OUTPUT_FILE_WITH_MULTI_FLAGSTATS
 
 # ----------------------------------- Unique ----------------------------------
 
@@ -214,14 +214,14 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"$DASHES
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Samtools - MAPQ = Unique"
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"$DASHES
 
-# $SAMTOOLS_PATH/samtools view -b -q 30 $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.bam > $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.bam
+$SAMTOOLS_PATH/samtools view -b -q 30 $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits.bam > $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.bam
 # Sort by Position
-# $SAMTOOLS_PATH/samtools sort $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.bam $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.sorted
+$SAMTOOLS_PATH/samtools sort $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.bam $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.sorted
 # Sort by Name
-# $SAMTOOLS_PATH/samtools sort -n $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.bam $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.sorted_by_name
+$SAMTOOLS_PATH/samtools sort -n $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.bam $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.sorted_by_name
 # Index & Flagstat Position-based alignments
-# $SAMTOOLS_PATH/samtools index $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.sorted.bam
-# $SAMTOOLS_PATH/samtools flagstat $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.sorted.bam > $OUTPUT_DIR_ALIGNMENTS_DNA/flagStats-unique.txt
+$SAMTOOLS_PATH/samtools index $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.sorted.bam
+$SAMTOOLS_PATH/samtools flagstat $OUTPUT_DIR_ALIGNMENTS_DNA/accepted_hits-unique.sorted.bam > $OUTPUT_DIR_ALIGNMENTS_DNA/flagStats-unique.txt
 
 
 # Remove files that are no longer needed
@@ -267,15 +267,15 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Cufflinks Multi..."
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"$DASHES
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
 
-# $CUFFLINKS_APP_PATH/cufflinks --no-update-check -p $PROC_THREADS \
-# 												--no-faux-reads \
-# 												--output-dir $ASSEMBLY_OUT_DIR_MULTI_DNA \
-# 												--min-isoform-fraction $MIN_ISOFORM_FRACTION \
-# 												--pre-mrna-fraction $PRE_MRNA_FRACTION \
-# 												--overhang-tolerance $OVERHANG_TOLERANCE \
-# 												--GTF-guide $GTF_FILE \
-# 												--mask-file $RRNA_MASK_GTF_FILE \
-# 												$ALIGNMENT_FILE_WITH_MULTI_HITS
+$CUFFLINKS_APP_PATH/cufflinks --no-update-check -p $PROC_THREADS \
+												--no-faux-reads \
+												--output-dir $ASSEMBLY_OUT_DIR_MULTI_DNA \
+												--min-isoform-fraction $MIN_ISOFORM_FRACTION \
+												--pre-mrna-fraction $PRE_MRNA_FRACTION \
+												--overhang-tolerance $OVERHANG_TOLERANCE \
+												--GTF-guide $GTF_FILE \
+												--mask-file $RRNA_MASK_GTF_FILE \
+												$ALIGNMENT_FILE_WITH_MULTI_HITS
 
 # --------------------------------- Cufflinks Multi MAPQ --------------------------------
 
@@ -285,15 +285,15 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Cufflinks Multi_MAPQ..."
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"$DASHES
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
 
-# $CUFFLINKS_APP_PATH/cufflinks --no-update-check -p $PROC_THREADS \
-# 												--no-faux-reads \
-# 												--output-dir $ASSEMBLY_OUT_DIR_MULTI_DNA_MAPQ_FILTERED \
-# 												--min-isoform-fraction $MIN_ISOFORM_FRACTION \
-# 												--pre-mrna-fraction $PRE_MRNA_FRACTION \
-# 												--overhang-tolerance $OVERHANG_TOLERANCE \
-# 												--GTF-guide $GTF_FILE \
-# 												--mask-file $RRNA_MASK_GTF_FILE \
-# 												$ALIGNMENT_FILE_WITH_MULTI_HITS_MAPQ_FILTERED
+$CUFFLINKS_APP_PATH/cufflinks --no-update-check -p $PROC_THREADS \
+												--no-faux-reads \
+												--output-dir $ASSEMBLY_OUT_DIR_MULTI_DNA_MAPQ_FILTERED \
+												--min-isoform-fraction $MIN_ISOFORM_FRACTION \
+												--pre-mrna-fraction $PRE_MRNA_FRACTION \
+												--overhang-tolerance $OVERHANG_TOLERANCE \
+												--GTF-guide $GTF_FILE \
+												--mask-file $RRNA_MASK_GTF_FILE \
+												$ALIGNMENT_FILE_WITH_MULTI_HITS_MAPQ_FILTERED
 
 # -----------------------------------  Cufflinks Unique ---------------------------------
 
@@ -303,15 +303,15 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Cufflinks Unique..."
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"$DASHES
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
 
-# $CUFFLINKS_APP_PATH/cufflinks --no-update-check -p $PROC_THREADS \
-# 												--no-faux-reads \
-# 												--output-dir $ASSEMBLY_OUT_DIR_UNIQUE_DNA \
-# 												--min-isoform-fraction $MIN_ISOFORM_FRACTION \
-# 												--pre-mrna-fraction $PRE_MRNA_FRACTION \
-# 												--overhang-tolerance $OVERHANG_TOLERANCE \
-# 												--GTF-guide $GTF_FILE \
-# 												--mask-file $RRNA_MASK_GTF_FILE \
-# 												$ALIGNMENT_FILE_WITH_UNIQUE_HITS
+$CUFFLINKS_APP_PATH/cufflinks --no-update-check -p $PROC_THREADS \
+												--no-faux-reads \
+												--output-dir $ASSEMBLY_OUT_DIR_UNIQUE_DNA \
+												--min-isoform-fraction $MIN_ISOFORM_FRACTION \
+												--pre-mrna-fraction $PRE_MRNA_FRACTION \
+												--overhang-tolerance $OVERHANG_TOLERANCE \
+												--GTF-guide $GTF_FILE \
+												--mask-file $RRNA_MASK_GTF_FILE \
+												$ALIGNMENT_FILE_WITH_UNIQUE_HITS
 
 
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Done."
@@ -358,10 +358,10 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Counts Multi..."
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"$DASHES
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
 
-# $COUNT_APP_PATH/countExtractor.pl -a $ALIGNMENT_FILE_WITH_MULTI_HITS \
-# 								  -g $GTF_FILE \
-# 								  -o $OUTPUT_DIR_FOR_COUNTS_MULTI \
-# 								  -p $PREFIX_FOR_COUNTS_MULTI
+$COUNT_APP_PATH/countExtractor.pl -a $ALIGNMENT_FILE_WITH_MULTI_HITS \
+								  -g $GTF_FILE \
+								  -o $OUTPUT_DIR_FOR_COUNTS_MULTI \
+								  -p $PREFIX_FOR_COUNTS_MULTI
 
 # ---------------------------------- Counts Multi MAPQ ----------------------------------
 
@@ -371,10 +371,10 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Counts Multi_MAPQ..."
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"$DASHES
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
 
-# $COUNT_APP_PATH/countExtractor.pl -a $ALIGNMENT_FILE_WITH_MULTI_HITS_MAPQ_FILTERED \
-# 							      -g $GTF_FILE \
-# 							      -o $OUTPUT_DIR_FOR_COUNTS_MULTI_MAPQ_FILTERED \
-# 							      -p $PREFIX_FOR_COUNTS_MULTI_MAPQ_FILTERED
+$COUNT_APP_PATH/countExtractor.pl -a $ALIGNMENT_FILE_WITH_MULTI_HITS_MAPQ_FILTERED \
+							      -g $GTF_FILE \
+							      -o $OUTPUT_DIR_FOR_COUNTS_MULTI_MAPQ_FILTERED \
+							      -p $PREFIX_FOR_COUNTS_MULTI_MAPQ_FILTERED
 
 # ------------------------------------  Counts Unique -----------------------------------
 
@@ -389,10 +389,10 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Intronic Counts..."
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
 
-# $COUNT_APP_PATH/countExtractor.pl -a $ALIGNMENT_FILE_WITH_UNIQUE_HITS \
-# 							      -g $GTF_FILE \
-# 							      -o $OUTPUT_DIR_FOR_COUNTS_UNIQUE \
-# 							      -p $PREFIX_FOR_COUNTS_UNIQUE
+$COUNT_APP_PATH/countExtractor.pl -a $ALIGNMENT_FILE_WITH_UNIQUE_HITS \
+							      -g $GTF_FILE \
+							      -o $OUTPUT_DIR_FOR_COUNTS_UNIQUE \
+							      -p $PREFIX_FOR_COUNTS_UNIQUE
 
 
 
@@ -407,7 +407,7 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
 
 OUTPUT_FILE_FOR_EXONIC_COUNTS_UNIQUE=$OUTPUT_DIR_FOR_EXONIC_COUNTS_UNIQUE'/unique_exonic_counts.txt'
 
-# htseq-count --quiet --format='bam' --order='name' $ALIGNMENT_FILE_WITH_UNIQUE_HITS_SORTED_BY_NAME $GTF_FILE > $OUTPUT_FILE_FOR_EXONIC_COUNTS_UNIQUE
+htseq-count --quiet --format='bam' --order='name' $ALIGNMENT_FILE_WITH_UNIQUE_HITS_SORTED_BY_NAME $GTF_FILE > $OUTPUT_FILE_FOR_EXONIC_COUNTS_UNIQUE
 
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Done."

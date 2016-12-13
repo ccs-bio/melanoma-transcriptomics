@@ -38,7 +38,7 @@ options( digits = 15 ) # Enable printing of large numbers. R defaults to "roundi
 # ------------------------------------------------- Main ----------------------------------------------------
 
 
-working_directory="/Users/camilo/Documents/CCS/Enrico/Projects/Melanoma/Analysis_Full"
+working_directory="/path/to/base/analysis/directory"
 
 setwd( file.path( working_directory ) )
 
