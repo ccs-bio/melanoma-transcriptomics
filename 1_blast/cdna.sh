@@ -43,7 +43,7 @@ echo "[" `date '+%m/%d/%y %H:%M:%S'` "]"
 
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Downloading CDNA file..."
 
-DB_VERSION="76"
+DB_VERSION="72"
 CDNA_FILE="Homo_sapiens.GRCh38.cdna.all.fa"
 CDNA_FILE_COMPRESSED=$CDNA_FILE".gz"
 ENSEMBL_CDNA_FILE_PATH="ftp://ftp.ensembl.org//pub/release-"$DB_VERSION"/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz"

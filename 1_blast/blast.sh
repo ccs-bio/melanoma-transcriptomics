@@ -1,27 +1,28 @@
 #!/bin/sh
 
-PERL_APP_PATH='/projects/bioinf/data/cvaldes/tcga/skcm/examination'
-BLAST_APP='/share/apps/blast+/2.2.28/bin'
+#	Path to 'fasta_extractor.pl'
+PERL_APP_PATH='/path/to/custom/perl/script'
+BLAST_APP='/path/to/blast/2.2.28/bin'
 
-CDNA_FASTA='/nethome/cvaldes/data/references/ensembl/human/72/cdna/Homo_sapiens.GRCh37.72.cdna.all.fa'
+CDNA_FASTA='/path/to/ensembl/annotations/72/cdna/Homo_sapiens.GRCh37.72.cdna.all.fa'
 
 echo ""
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Starting..."
 
-INPUT_FILE_WITH_PROTEIN_CODING_IDS='/nethome/cvaldes/data/references/ensembl/human/72/cdna/gene_ids_for_protein_coding.txt'
-INPUT_FILE_WITH_PSEUDOGENE_IDS='/nethome/cvaldes/data/references/ensembl/human/72/cdna/gene_ids_for_pseudogenes.txt'
+INPUT_FILE_WITH_PROTEIN_CODING_IDS='/path/to/gene_ids_for_protein_coding.txt'
+INPUT_FILE_WITH_PSEUDOGENE_IDS='/path/to/gene_ids_for_pseudogenes.txt'
 
 PREFIX_FOR_PROTEIN_CODING='protein_coding'
 PREFIX_FOR_PSEUDOGENES='pseudogenes'
 
-OUTPUT_DIR='/nethome/cvaldes/data/references/ensembl/human/72/cdna'
+OUTPUT_DIR='/path/to/output/directory'
 
 echo ""
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Extracting FASTA sequences..."
 
 # Run the script to extract the FASTA sequences of interest (these are used in the BLAST step to find 'Best_Hits')
-# $PERL_APP_PATH/fasta_extractor.pl -i $INPUT_FILE_WITH_PROTEIN_CODING_IDS -o $OUTPUT_DIR -c $CDNA_FASTA -p $PREFIX_FOR_PROTEIN_CODING
-# $PERL_APP_PATH/fasta_extractor.pl -i $INPUT_FILE_WITH_PSEUDOGENE_IDS -o $OUTPUT_DIR -c $CDNA_FASTA -p $PREFIX_FOR_PSEUDOGENES
+$PERL_APP_PATH/fasta_extractor.pl -i $INPUT_FILE_WITH_PROTEIN_CODING_IDS -o $OUTPUT_DIR -c $CDNA_FASTA -p $PREFIX_FOR_PROTEIN_CODING
+$PERL_APP_PATH/fasta_extractor.pl -i $INPUT_FILE_WITH_PSEUDOGENE_IDS -o $OUTPUT_DIR -c $CDNA_FASTA -p $PREFIX_FOR_PSEUDOGENES
 
 
 #------------------------------------------------------------------------------------------------------------
@@ -71,4 +72,4 @@ OUTPUT_SINGLE_HITS_PSEUDOGENE_VS_PROTEIN_CODING=$BLAST_OUPUT_DIR'/pseudogenes_vs
 echo ""
 echo "[" `date '+%m/%d/%y %H:%M:%S'` "] Extracting Unique hits..."
 
-#sort -u $OUTPUT_PSEUDOGENES_VS_PROTEIN_CODING > $OUTPUT_SINGLE_HITS_PSEUDOGENE_VS_PROTEIN_CODING
+sort -u $OUTPUT_PSEUDOGENES_VS_PROTEIN_CODING > $OUTPUT_SINGLE_HITS_PSEUDOGENE_VS_PROTEIN_CODING
