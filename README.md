@@ -32,9 +32,18 @@ You will also need a reasonably modern computer and operating system that can su
 
 [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) is required for the alignment step.  See the Bowtie2 [Getting Started](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#getting-started-with-bowtie-2-lambda-phage-example) guide for instructions on installing and running Bowtie2.
 
+###	TopHat 2
+[TopHat2](http://ccb.jhu.edu/software/tophat/index.shtml) is required for mapping spliced-reads onto the human genome and transcriptome.
+
 ### Samtools
 
 [Samtools](http://www.htslib.org/) is required for parsing the alignments and generating miscellaneous alignment statistics.  See the [Samtools Documentation](http://www.htslib.org/doc/) for instructions on installing and running Samtools.
+
+### HTSeq-Count
+[htseq-count](http://www-huber.embl.de/HTSeq/doc/count.html) is required for obtaining the read counts quantification units.
+
+### CuffDiff
+[CuffDiff](http://cole-trapnell-lab.github.io/cufflinks/cuffdiff/) is required for obtaining the FPKM quantification units.
 
 ### R
 
@@ -51,7 +60,7 @@ The latest version of [R](http://www.r-project.org/) is required for calculating
 
 ## Contact
 
-Contact [Camilo Valdes](mailto:cvaldes3@miami.edu) for pull requests, bug reports, good jokes and coffee recipes.
+Contact [Camilo Valdes](mailto:cvaldes3@miami.edu) for pull requests, and/or bug reports.
 
 ### Maintainers
 
