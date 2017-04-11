@@ -1,11 +1,11 @@
 The code section includes the following elements:
 
-**Blast** - with reference to the identification of pseudogene-parental gene associations
+Blast - with reference to the identification of pseudogene-parental gene associations
 
-**Quality Control** - with reference to pre-profling computational steps of mapping, expression filters, sample analyses
+Quality Control - with reference to pre-profling computational steps of mapping, expression filters, sample analyses
 
-**Methods** -  with reference to the 5 profiling methods we have used first individually and then in the ensemble approach
+Methods -  with reference to the 5 profiling methods we have used first individually and then in the ensemble approach
 
-**Models** - with reference to the two post-profiling models used for further inference on top of the 5 methods, plus the statistics used for the selection of the significant values (boxplots and IQR)
+Models - with reference to the two post-profiling models used for further inference on top of the 5 methods, plus the statistics used for the selection of the significant values (boxplots and IQR)
 
-**Visualizations** - with reference to the graphics that we have originally proposed in various sections of the paper
+Visualizations - with reference to the graphics that we have originally proposed in various sections of the paper
